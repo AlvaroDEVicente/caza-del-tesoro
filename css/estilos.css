@@ -32,7 +32,7 @@ body {
   background-image: url("../assets/fondo_pergamino.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100% 100%;
+  background-size: 80% 90%;
 
   border: none;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
@@ -49,29 +49,18 @@ body {
 #layout-juego {
   display: flex;
   flex-direction: row;
-  justify-content: space-between; /* Distribuye espacio entre columnas */
-  align-items: flex-start; /* Alineación superior */
+
+  /* CAMBIO CLAVE: Usamos center en vez de space-between */
+  justify-content: center;
+
+  align-items: flex-start;
   width: 100%;
   flex: 1;
-  gap: 20px;
+
+  /* Controlamos la separación exacta con el gap */
+  gap: 40px;
+
   margin-top: 10px;
-}
-
-/* COLUMNAS LATERALES (Izquierda y Derecha) */
-.columna-lateral {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 250px; /* Ancho fijo para controles y ranking */
-  flex-shrink: 0;
-}
-
-/* COLUMNA CENTRAL (Tablero) */
-.columna-central {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 /* --- 5. TIPOGRAFÍA Y UI GENERAL --- */
