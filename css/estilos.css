@@ -454,64 +454,78 @@ img,
   }
 }
 
-/* --- 11. FIX PARA PORTÁTILES Y PANTALLAS BAJAS --- */
-/* Se activa si el ancho es de portátil O si la altura es pequeña (menos de 900px) */
+/* --- 11. FIX AGRESIVO PARA PORTÁTILES Y PANTALLAS BAJAS (V2) --- */
 @media (max-width: 1600px) and (max-height: 900px) {
-  /* 1. Ajustamos el contenedor principal para que no ocupe tanto */
+  /* 1. Ajuste del contenedor principal */
   #app {
-    width: 90%;
-    max-width: 1000px; /* Limitamos el ancho */
-    min-height: auto; /* Quitamos la altura mínima forzada */
-    height: 95vh; /* Ocupa el 95% de la altura disponible */
-    padding: 10px 30px; /* Menos relleno */
-    aspect-ratio: auto; /* Quitamos la proporción fija para que se adapte */
+    width: 95%; /* Aprovechamos más ancho */
+    max-width: 1100px;
+    min-height: auto;
+    height: 98vh; /* Casi toda la altura */
+    padding: 5px 20px;
+    aspect-ratio: auto;
   }
 
-  /* 2. Hacemos el tablero más pequeño */
+  /* 2. TABLERO MÁS GRANDE (Lo que pedías) */
   table {
-    /* Usamos 'vmin' para que dependa del lado más pequeño de la pantalla */
-    width: 50vmin;
-    height: 50vmin;
-    border-width: 3px; /* Borde más fino */
+    width: 65vmin; /* Aumentado de 50 a 65 */
+    height: 65vmin;
+    border-width: 4px;
   }
 
-  /* 3. Reducimos mucho el título */
-  .titulo-juego-mapa {
-    font-size: 2.2em; /* Mucho más pequeño */
+  /* 3. DADO MÁS GRANDE */
+  .dado-visual {
+    max-width: 160px; /* Aumentado de 100 a 160px */
+  }
+
+  /* 4. REGLAS (INICIO) MÁS PEQUEÑAS */
+  .caja-instrucciones {
+    padding: 15px 30px; /* Menos relleno */
+    max-width: 800px;
     margin-top: 5px;
+  }
+
+  .caja-instrucciones h3 {
+    font-size: 2em; /* Título reglas más pequeño */
     margin-bottom: 10px;
   }
 
-  /* 4. Ajustamos la columna izquierda para que quepa al lado */
-  .columna-izquierda {
-    width: 180px; /* Más estrecha */
-    gap: 10px; /* Menos espacio entre cajas */
+  .caja-instrucciones li {
+    font-size: 1.2em; /* Texto de reglas más pequeño para que quepa */
+    margin-bottom: 8px;
   }
 
-  /* 5. Cajas de información más compactas */
-  .caja-ui {
-    padding: 8px;
-    font-size: 0.9em;
-  }
-
-  .caja-ui h3 {
-    font-size: 1.3em;
+  /* 5. Ajustes de estructura general */
+  .titulo-juego-mapa {
+    font-size: 2.5em;
+    margin-top: 5px;
     margin-bottom: 5px;
   }
 
-  /* 6. El dado más pequeño */
-  .dado-visual {
-    max-width: 100px;
+  .columna-izquierda {
+    width: 240px; /* Un poco más de espacio para el dado grande */
+    gap: 8px;
   }
 
-  /* 7. Botones más compactos */
-  button {
-    font-size: 1.1em;
-    padding: 8px 15px;
+  .caja-ui {
+    padding: 10px;
+  }
+  .caja-ui h3 {
+    font-size: 1.4em;
+    margin-bottom: 5px;
+    border-bottom-width: 1px;
   }
 
-  /* 8. Forzamos que no haya scroll en el cuerpo si es posible */
+  /* Ajuste para que el título de inicio no sea gigante */
+  .titulo-inicio {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+  }
+  .contenedor-input-inicio {
+    margin-bottom: 15px;
+  }
+
   body {
-    overflow: hidden; /* Intenta ocultar la barra de scroll */
+    overflow: hidden;
   }
 }
