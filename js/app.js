@@ -103,6 +103,10 @@ function cargarPantallaInicio() {
 function cargarPantallaBienvenida() {
   appContainer.innerHTML = "";
 
+  // Creamos el contenedor y le asignamos la clase CSS
+  let contenedorCentro = document.createElement("div");
+  contenedorCentro.className = "contenedor-centrado";
+
   let h1Bienvenida = document.createElement("h1");
   h1Bienvenida.textContent = "¡Bienvenido, Capitán " + estado.nombre + "!";
   h1Bienvenida.className = "titulo-bienvenida";
@@ -113,13 +117,17 @@ function cargarPantallaBienvenida() {
 
   botonJugar.addEventListener("click", iniciarJuego);
 
-  appContainer.appendChild(h1Bienvenida);
-  appContainer.appendChild(botonJugar);
+  // Añadimos los elementos al contenedor
+  contenedorCentro.appendChild(h1Bienvenida);
+  contenedorCentro.appendChild(botonJugar);
+
+  // Añadimos el contenedor a la app
+  appContainer.appendChild(contenedorCentro);
 }
 
 /**
  * Pantalla 3: El Juego Principal.
- * Aquí montamos la estructura de 2 columnas (Controles a la izquierda, Mapa a la derecha).
+ * Aquí montamos la estructura de 3 columnas (Controles, Tablero, Ranking).
  */
 function iniciarJuego() {
   estado.juegoActivo = true;
@@ -130,13 +138,13 @@ function iniciarJuego() {
   tituloJuego.textContent = "LA CAZA DEL TESORO";
   tituloJuego.className = "titulo-juego-mapa";
 
-  // Contenedor que organiza todo en filas
+  // Contenedor que organiza todo en columnas
   let layoutJuego = document.createElement("div");
   layoutJuego.id = "layout-juego";
 
-  // --- COLUMNA IZQUIERDA (Botones y Datos) ---
+  // --- COLUMNA 1: IZQUIERDA (Dado y Bitácora) ---
   let colIzquierda = document.createElement("div");
-  colIzquierda.className = "columna-izquierda";
+  colIzquierda.className = "columna-lateral";
 
   // 1. El Dado
   let panelDado = document.createElement("div");
@@ -173,12 +181,28 @@ function iniciarJuego() {
   panelPuntuacion.appendChild(labelPuntos);
   panelPuntuacion.appendChild(infoStatus);
 
-  // 3. El Historial (muestra al MEJOR PIRATA)
+  // Añadimos los paneles a la columna izquierda
+  colIzquierda.appendChild(panelDado);
+  colIzquierda.appendChild(panelPuntuacion);
+
+  // --- COLUMNA 2: CENTRO (El Tablero) ---
+  let colCentro = document.createElement("div");
+  colCentro.className = "columna-central";
+
+  let contenedorTablero = document.createElement("div");
+  contenedorTablero.id = "tablero-juego";
+
+  colCentro.appendChild(contenedorTablero);
+
+  // --- COLUMNA 3: DERECHA (Ranking Mejores Piratas) ---
+  let colDerecha = document.createElement("div");
+  colDerecha.className = "columna-lateral";
+
   let panelHistorial = document.createElement("div");
   panelHistorial.className = "caja-ui panel-historial";
 
   let labelHistorial = document.createElement("h3");
-  labelHistorial.textContent = "MEJOR PIRATA";
+  labelHistorial.textContent = "MEJORES PIRATAS";
 
   let listaHistorial = document.createElement("ul");
   listaHistorial.id = "lista-historial";
@@ -188,24 +212,14 @@ function iniciarJuego() {
   panelHistorial.appendChild(labelHistorial);
   panelHistorial.appendChild(listaHistorial);
 
-  // Añadimos los 3 paneles a la columna izquierda
-  colIzquierda.appendChild(panelDado);
-  colIzquierda.appendChild(panelPuntuacion);
-  colIzquierda.appendChild(panelHistorial);
-
-  // --- COLUMNA DERECHA (El Tablero) ---
-  let colDerecha = document.createElement("div");
-  colDerecha.className = "columna-derecha";
-
-  let contenedorTablero = document.createElement("div");
-  contenedorTablero.id = "tablero-juego";
-
-  colDerecha.appendChild(contenedorTablero);
+  colDerecha.appendChild(panelHistorial);
 
   // Juntamos todo en la pantalla
-  appContainer.appendChild(tituloJuego);
   layoutJuego.appendChild(colIzquierda);
+  layoutJuego.appendChild(colCentro);
   layoutJuego.appendChild(colDerecha);
+
+  appContainer.appendChild(tituloJuego);
   appContainer.appendChild(layoutJuego);
 
   // Preparamos los datos y dibujamos el mapa
@@ -434,7 +448,7 @@ function actualizarTextoInfoHTML() {
 
 /**
  * Esta función recupera la lista de partidas guardadas en el navegador.
- * Busca el récord absoluto (mínimo de tiradas) y muestra a ese jugador.
+ * Muestra el TOP de mejores piratas ordenado por tiradas.
  */
 function obtenerHTMLHistorial() {
   /* * EXPLICACIÓN DE DATOS GUARDADOS:
@@ -448,20 +462,29 @@ function obtenerHTMLHistorial() {
     return "<li style='list-style:none; color:#666;'>Sin registros.</li>";
   }
 
-  // Ordenamos el array por tiradas (menor a mayor)
+  // Ordenamos el array por tiradas (menor a mayor = mejor puntuación)
   historial.sort((a, b) => a.tiradas - b.tiradas);
 
-  // Cogemos al mejor (el primero de la lista ordenada)
-  let mejorPirata = historial[0];
+  // Cogemos el Top 10 para no saturar la lista
+  let topPiratas = historial.slice(0, 10);
+  let html = "";
 
-  return `
-    <li class="item-mejor-pirata">
-        <strong style="font-size: 1.4em; color: #8b0000; display:block; margin-bottom:5px;">
-            ${mejorPirata.nombre}
-        </strong>
-        <span> ${mejorPirata.tiradas} tiradas</span>
-    </li>
-  `;
+  topPiratas.forEach((pirata, index) => {
+    let medalla = "";
+    if (index === 0) medalla = "🥇 ";
+    else if (index === 1) medalla = "🥈 ";
+    else if (index === 2) medalla = "🥉 ";
+    else medalla = `#${index + 1} `;
+
+    html += `
+        <li class="item-ranking">
+            <span class="ranking-nombre">${medalla}${pirata.nombre}</span>
+            <span class="ranking-puntos">${pirata.tiradas} t.</span>
+        </li>
+    `;
+  });
+
+  return html;
 }
 
 function gestionarVictoria() {
