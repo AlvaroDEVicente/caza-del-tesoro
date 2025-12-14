@@ -454,40 +454,64 @@ img,
   }
 }
 
-/* --- 11. NUEVO: FIX PARA PORTÁTILES (Pantallas medianas) --- */
-/* Este bloque arreglará el problema en tu portátil */
-@media (min-width: 901px) and (max-width: 1500px) {
-  /* Hacemos el pergamino más ancho para que quepa todo */
+/* --- 11. FIX PARA PORTÁTILES Y PANTALLAS BAJAS --- */
+/* Se activa si el ancho es de portátil O si la altura es pequeña (menos de 900px) */
+@media (max-width: 1600px) and (max-height: 900px) {
+  /* 1. Ajustamos el contenedor principal para que no ocupe tanto */
   #app {
-    max-width: 80%;
-    padding: 2% 5%;
+    width: 90%;
+    max-width: 1000px; /* Limitamos el ancho */
+    min-height: auto; /* Quitamos la altura mínima forzada */
+    height: 95vh; /* Ocupa el 95% de la altura disponible */
+    padding: 10px 30px; /* Menos relleno */
+    aspect-ratio: auto; /* Quitamos la proporción fija para que se adapte */
   }
 
-  /* Reducimos el tamaño de la tabla para que no empuje */
+  /* 2. Hacemos el tablero más pequeño */
   table {
-    width: 55vmin;
-    height: 55vmin;
+    /* Usamos 'vmin' para que dependa del lado más pequeño de la pantalla */
+    width: 50vmin;
+    height: 50vmin;
+    border-width: 3px; /* Borde más fino */
   }
 
-  /* Reducimos el tamaño del título */
+  /* 3. Reducimos mucho el título */
   .titulo-juego-mapa {
-    font-size: 2.5em;
-    margin-top: 10px;
+    font-size: 2.2em; /* Mucho más pequeño */
+    margin-top: 5px;
     margin-bottom: 10px;
   }
 
-  /* Ajustamos la columna izquierda */
+  /* 4. Ajustamos la columna izquierda para que quepa al lado */
   .columna-izquierda {
-    width: 220px;
-    gap: 10px;
+    width: 180px; /* Más estrecha */
+    gap: 10px; /* Menos espacio entre cajas */
   }
 
-  /* Dado y botón un poco más pequeños */
-  .dado-visual {
-    max-width: 150px;
+  /* 5. Cajas de información más compactas */
+  .caja-ui {
+    padding: 8px;
+    font-size: 0.9em;
   }
+
+  .caja-ui h3 {
+    font-size: 1.3em;
+    margin-bottom: 5px;
+  }
+
+  /* 6. El dado más pequeño */
+  .dado-visual {
+    max-width: 100px;
+  }
+
+  /* 7. Botones más compactos */
   button {
-    font-size: 1.2em;
-    padding: 10px 20px;
+    font-size: 1.1em;
+    padding: 8px 15px;
+  }
+
+  /* 8. Forzamos que no haya scroll en el cuerpo si es posible */
+  body {
+    overflow: hidden; /* Intenta ocultar la barra de scroll */
   }
 }
