@@ -1,0 +1,459 @@
+/* PROYECTO: CAZA DEL TESORO
+ * Descripción: Hoja de estilos principal.
+ * Alumno: Álvaro
+ * Versión: Final
+ */
+
+/* --- 1. IMPORTACIÓN DE FUENTES --- */
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Pirata+One&display=swap");
+
+/* --- 2. CONFIGURACIÓN GENERAL --- */
+body {
+  font-family: "Merriweather", serif;
+  background: url("../assets/fondo_web.png") no-repeat center center fixed;
+  background-size: cover;
+  color: #4a3b2b;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- 3. CONTENEDOR PRINCIPAL (#APP) --- */
+#app {
+  width: 100vw;
+  max-width: 60%;
+  min-height: 90vh;
+  aspect-ratio: 16/9;
+
+  background-image: url("../assets/fondo_pergamino.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+
+  border: none;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+
+  padding: 4% 8%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+}
+
+/* --- 4. LAYOUT DEL JUEGO --- */
+#layout-juego {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  width: 100%;
+  flex: 1;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 0;
+}
+
+/* --- 5. TIPOGRAFÍA Y UI GENERAL --- */
+
+/* Título principal */
+.titulo-juego-mapa {
+  font-family: "Pirata One", cursive;
+  color: #8b0000;
+  font-size: 3.5em;
+  line-height: 1;
+  text-align: center;
+  width: 100%;
+
+  margin-top: 30px;
+  margin-bottom: 20px;
+
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  border-bottom: 2px solid rgba(139, 0, 0, 0.3);
+  padding-bottom: 5px;
+  flex-shrink: 0;
+}
+
+h1 {
+  font-family: "Pirata One", cursive;
+  color: #8b0000;
+  font-size: 3.5em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+
+h2 {
+  font-family: "Pirata One", cursive;
+  color: #4a3b2b;
+}
+label {
+  font-weight: bold;
+  color: #8b0000;
+}
+
+input[type="text"] {
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: 2px solid #8b0000;
+  background-color: #fff8e7;
+  font-family: "Merriweather", serif;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  width: 60%;
+}
+
+/* Estilos de botones generales */
+button {
+  font-family: "Pirata One", cursive;
+  padding: 15px 35px; /* Botones más grandes y cómodos */
+  font-size: 1.5em; /* Texto más legible */
+  cursor: pointer;
+  background: url("../assets/textura_madera.png") repeat;
+  color: #fbeca0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  border: 3px solid #c9a959;
+  border-radius: 8px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  border-color: #ffd700;
+  color: white;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(50%);
+}
+
+.btn-grande {
+  font-size: 1.8em;
+  padding: 15px 40px;
+  margin-top: 25px;
+  background: #8b0000;
+  background-image: linear-gradient(to bottom, #a50000, #8b0000);
+}
+
+.texto-error {
+  color: #d32f2f;
+  font-weight: bold;
+}
+.texto-error:not(:empty) {
+  background-color: rgba(255, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px dashed #d32f2f;
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.titulo-bienvenida {
+  color: #006994;
+  font-size: 2.5em;
+  text-shadow: 1px 1px 0px #fbeca0;
+}
+.oculto {
+  display: none !important;
+}
+
+/* --- 6. COLUMNAS Y PANELES --- */
+
+.columna-izquierda {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 280px;
+  flex-shrink: 0;
+  justify-content: center;
+}
+
+.columna-derecha {
+  flex-grow: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Cajas UI (Paneles de madera) */
+.caja-ui {
+  background-color: rgba(255, 248, 231, 0.8);
+  border: 4px solid #5d4037;
+  border-image: url("../assets/textura_madera.png") 30 stretch;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.caja-ui h3 {
+  margin-top: 0;
+  font-family: "Pirata One", cursive;
+  color: #8b0000;
+  font-size: 1.6em;
+  border-bottom: 2px dashed #8b0000;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+
+/* Panel Dado */
+.panel-dado {
+  padding: 10px !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-image: none;
+  box-shadow: none;
+  outline: none;
+  cursor: default;
+  user-select: none;
+  gap: 5px;
+}
+
+.dado-visual {
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.5));
+  transition: transform 0.1s;
+  margin-bottom: 0;
+  user-select: none;
+}
+
+.panel-puntuacion {
+  font-size: 1.1em;
+}
+
+/* Ajustes para el panel de "Mejor Pirata" (Visualización única) */
+.panel-historial ul {
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  text-align: center; /* Centrado para destacar al ganador */
+}
+
+/* Quitamos scrollbars antiguos ya que solo hay un item */
+.panel-historial ul::-webkit-scrollbar {
+  display: none;
+}
+
+.panel-historial li {
+  padding: 5px 0;
+  border: none;
+}
+
+/* Estilo para el texto del mejor pirata */
+.item-mejor-pirata {
+  font-family: "Merriweather", serif;
+  color: #4a3b2b;
+}
+
+/* Animaciones */
+.rodando {
+  animation: girarDado 0.5s ease-out;
+}
+@keyframes girarDado {
+  0% {
+    transform: rotate(0deg) scale(0.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    opacity: 1;
+  }
+}
+
+/* --- 7. TABLERO DE JUEGO --- */
+#tablero-juego {
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+table {
+  width: 70vmin;
+  height: vmin;
+  border-collapse: collapse;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  border: 5px solid #c9a959;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #eebb99;
+}
+
+.celda {
+  width: 10%;
+  height: 10%;
+  padding: 0;
+  margin: 0;
+  border: 1px dotted rgba(139, 69, 19, 0.3);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+  user-select: none;
+}
+
+/* --- 8. LÓGICA DE MOVIMIENTO --- */
+.puede-moverse {
+  position: relative;
+  z-index: 10;
+
+  /* Efecto 3D */
+  transform: translateY(-5px);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+
+  /* Estilo visual rojo */
+  background-color: rgba(255, 0, 0, 0.6) !important;
+  border: 3px solid #ff0000;
+
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s;
+}
+
+.puede-moverse:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 0, 0, 0.8) !important;
+  border-color: #ff3333;
+}
+
+.puede-moverse:active {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.puede-moverse img {
+  filter: drop-shadow(0 0 5px #ff0000);
+  opacity: 0.9;
+}
+
+/* --- 9. PANTALLA DE INICIO --- */
+.titulo-inicio {
+  margin-bottom: 20px;
+  font-size: 5em;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.contenedor-input-inicio {
+  margin-bottom: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.contenedor-input-inicio input {
+  font-size: 1.5em;
+  padding: 15px;
+  width: 50%;
+}
+
+.contenedor-input-inicio button {
+  font-size: 1.5em;
+  padding: 15px 40px;
+}
+
+.caja-instrucciones {
+  background-color: rgba(255, 248, 231, 0.85);
+  border: 3px dashed #8b0000;
+  border-radius: 15px;
+  padding: 30px 50px;
+  margin-top: 10px;
+  max-width: 900px;
+  width: 85%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.caja-instrucciones h3 {
+  font-family: "Pirata One", cursive;
+  color: #8b0000;
+  text-align: center;
+  font-size: 2.5em;
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 2px solid rgba(139, 0, 0, 0.4);
+  padding-bottom: 15px;
+}
+
+.caja-instrucciones ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  display: inline-block;
+}
+
+.caja-instrucciones li {
+  font-size: 1.6em;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  color: #4a3b2b;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.caja-instrucciones strong {
+  color: #8b0000;
+  font-size: 1.1em;
+}
+
+/* Bloqueo de selección */
+.titulo-juego-mapa,
+.caja-ui,
+.panel-dado,
+img,
+.caja-instrucciones {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* --- 10. RESPONSIVE --- */
+@media (max-width: 900px) {
+  #app {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+  }
+  #layout-juego {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .columna-izquierda {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .panel-dado,
+  .panel-puntuacion,
+  .panel-historial {
+    flex: 1;
+    min-width: 200px;
+  }
+  table {
+    width: 85vmin;
+    height: 85vmin;
+  }
+}
