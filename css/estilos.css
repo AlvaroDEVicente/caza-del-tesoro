@@ -467,10 +467,9 @@ img,
 
   /* 2. TABLERO GIGANTE*/
   table {
-    width: 74vmin; /* Subido de 65 a 74vmin (Casi el 75% de la altura de la pantalla) */
-    height: 74vmin;
+    width: 78vmin; /* Subido de 65 a 74vmin (Casi el 75% de la altura de la pantalla) */
+    height: 78vmin;
     border-width: 4px;
-    margin-left: 20px; /* Un poco de separación con la columna izquierda */
   }
 
   /* 3. TÍTULO MÁS ABAJO Y PEGADO */
